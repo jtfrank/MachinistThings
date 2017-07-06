@@ -15,12 +15,12 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> drillSizes = new ArrayList<String>();
-    AssetManager am = this.getAssets();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AssetManager am = getBaseContext().getAssets();
 
         try{
             InputStream is = am.open("drillbit_sizes.txt");
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         }
         catch(IOException e){
             e.printStackTrace();
+            drillSizes.add("drillbit_sizes.txt not found");
         }
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_listview, drillSizes);
